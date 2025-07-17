@@ -1,0 +1,66 @@
+body, html {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  font-family: 'Poppins', sans-serif;
+  background: linear-gradient(135deg, #f8f9fa, #dbeafe);
+}
+
+.app-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  min-height: 100vh;
+  padding: 60px 20px;
+}
+
+.content-wrapper {
+  width: 100%;
+  max-width: 700px;
+}
+
+/* Stylish form card */
+.form-card {
+  background-color: #1e293b; /* slate gray */
+  color: #f1f5f9;
+  padding: 2rem;
+  border-radius: 20px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+  margin-bottom: 40px;
+  transition: transform 0.3s ease;
+}
+.form-card:hover {
+  transform: scale(1.01);
+}
+
+.task-lists {
+  width: 100%;
+}
+
+/* Task list card */
+.task-lists .card {
+  border: none;
+  border-radius: 16px;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.08);
+  background-color: #ffffff;
+  transition: transform 0.2s ease;
+}
+.task-lists .card:hover {
+  transform: translateY(-3px);
+}
+
+/* Buttons row */
+.todo-buttons {
+  display: flex;
+  gap: 10px;
+}
+
+/* Stylish button overrides */
+.btn-success {
+  background-color: #0ea5e9;
+  border-color: #0ea5e9;
+}
+.btn-success:hover {
+  background-color: #0284c7;
+  border-color: #0284c7;
+}
