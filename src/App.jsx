@@ -3,7 +3,6 @@ import {
   Form, FormGroup, Label, Input, Button, Card, CardBody, CardTitle,
   Modal, ModalHeader, ModalBody, ModalFooter
 } from 'reactstrap';
-import { Plus, Minus, Pencil, Trash2 } from 'lucide-react';
 import './App.css';
 
 function App() {
@@ -88,112 +87,99 @@ function App() {
   };
 
   return (
+    
     <div className="app-wrapper">
       {/* FORM CARD */}
       <div className="content-wrapper">
-        <div className="form-card">
-          <CardBody>
-            <CardTitle tag="h2" className="text-center mb-4" style={{ fontWeight: '600', color: '#38bdf8' }}>
-              Multi Todo App
-            </CardTitle>
-            <Form>
-              <FormGroup>
-                <Label for="listTitle">Title of List</Label>
+      <div className="form-card">
+        <CardBody>
+          <CardTitle tag="h2" className="text-center mb-4" style={{ fontWeight: '600', color: '#38bdf8' }}>
+   Multi Todo App
+</CardTitle>
+          <Form>
+            <FormGroup>
+              <Label for="listTitle">Title of List</Label>
+              <Input
+                type="text"
+                id="listTitle"
+                value={listTitle}
+                onChange={(e) => setListTitle(e.target.value)}
+              />
+            </FormGroup>
+
+            <Label>Tasks of List</Label>
+            {tasks.map((task, index) => (
+              <FormGroup key={index} className="d-flex mb-2">
                 <Input
                   type="text"
-                  id="listTitle"
-                  value={listTitle}
-                  onChange={(e) => setListTitle(e.target.value)}
-                />
-              </FormGroup>
-
-              <Label>Tasks of List</Label>
-              {tasks.map((task, index) => (
-                <FormGroup key={index} className="d-flex mb-2 align-items-center">
-                  <Input
-                    type="text"
-                    value={task}
-                    onChange={(e) => handleTaskChange(e.target.value, index)}
-                  />
-                  {index === tasks.length - 1 ? (
-                    <>
-                      <Button color="primary" className="ms-2" onClick={addTaskField}>
-                        <Plus size={18} />
-                      </Button>
-                      {tasks.length > 1 && (
-                        <Button color="danger" className="ms-1" onClick={() => removeTaskField(index)}>
-                          <Minus size={18} />
-                        </Button>
-                      )}
-                    </>
-                  ) : (
-                    <Button color="danger" className="ms-2" onClick={() => removeTaskField(index)}>
-                      <Minus size={18} />
-                    </Button>
-                  )}
-                </FormGroup>
-              ))}
-              <Button color="success" onClick={handleAddList}>Add List</Button>
-            </Form>
-          </CardBody>
-        </div>
-
-        {/* LIST SECTION */}
-        <div className="task-lists">
-          {allLists.map((list, idx) => (
-            <Card className="mb-3" key={idx}>
-              <CardBody>
-                <h5>{idx}: {list.title}</h5>
-                <ul className="mt-2">
-                  {list.tasks.map((task, i) => (
-                    <li key={i}>{i}: {task}</li>
-                  ))}
-                </ul>
-                <div className="todo-buttons mt-2 d-flex gap-2">
-                  <Button color="success" onClick={() => openEditModal(idx)}>
-                    <Pencil size={16} />
-                  </Button>
-                  <Button color="warning" onClick={() => deleteList(idx)}>
-                    <Trash2 size={16} />
-                  </Button>
-                </div>
-              </CardBody>
-            </Card>
-          ))}
-        </div>
-
-        {/* MODAL */}
-        <Modal isOpen={modalOpen} toggle={() => setModalOpen(!modalOpen)}>
-          <ModalHeader toggle={() => setModalOpen(!modalOpen)}>
-            Update your Tasks
-          </ModalHeader>
-          <ModalBody>
-            <Input
-              type="text"
-              value={editTitle}
-              onChange={(e) => setEditTitle(e.target.value)}
-              className="mb-3"
-            />
-            {editTasks.map((task, i) => (
-              <FormGroup key={i} className="d-flex mb-2 align-items-center">
-                <Input
                   value={task}
-                  onChange={(e) => handleEditTaskChange(e.target.value, i)}
+                  onChange={(e) => handleTaskChange(e.target.value, index)}
                 />
-                <Button color="danger" className="ms-2" onClick={() => removeEditTaskField(i)}>
-                  <Minus size={18} />
-                </Button>
+                {index === tasks.length - 1 ? (
+                  <>
+                    <Button color="primary" className="ms-2" onClick={addTaskField}>+</Button>
+                    {tasks.length > 1 && (
+                      <Button color="danger" className="ms-1" onClick={() => removeTaskField(index)}>-</Button>
+                    )}
+                  </>
+                ) : (
+                  <Button color="danger" className="ms-2" onClick={() => removeTaskField(index)}>-</Button>
+                )}
               </FormGroup>
             ))}
-            <Button color="primary" onClick={addEditTaskField}>
-              <Plus size={18} />
-            </Button>
-          </ModalBody>
-          <ModalFooter>
-            <Button color="success" onClick={saveChanges}>Update</Button>
-          </ModalFooter>
-        </Modal>
+            <Button color="success" onClick={handleAddList}>Add List</Button>
+          </Form>
+        </CardBody>
       </div>
+
+      {/* LIST SECTION */}
+      <div className="task-lists">
+        {allLists.map((list, idx) => (
+          <Card className="mb-3" key={idx}>
+            <CardBody>
+              <h5>{idx}: {list.title}</h5>
+              <ul className="mt-2">
+                {list.tasks.map((task, i) => (
+                  <li key={i}>{i}: {task}</li>
+                ))}
+              </ul>
+              <div className="todo-buttons mt-2">
+                <Button color="success" onClick={() => openEditModal(idx)}>✏️</Button>
+                <Button color="warning" onClick={() => deleteList(idx)}>🗑️</Button>
+              </div>
+            </CardBody>
+          </Card>
+        ))}
+      </div>
+
+      {/* MODAL */}
+      <Modal isOpen={modalOpen} toggle={() => setModalOpen(!modalOpen)}>
+        <ModalHeader toggle={() => setModalOpen(!modalOpen)}>
+          Update your Tasks
+        </ModalHeader>
+        <ModalBody>
+          <Input
+            type="text"
+            value={editTitle}
+            onChange={(e) => setEditTitle(e.target.value)}
+            className="mb-3"
+          />
+          {editTasks.map((task, i) => (
+            <FormGroup key={i} className="d-flex mb-2">
+              <Input
+                value={task}
+                onChange={(e) => handleEditTaskChange(e.target.value, i)}
+              />
+              <Button color="danger" className="ms-2" onClick={() => removeEditTaskField(i)}>-</Button>
+            </FormGroup>
+          ))}
+          <Button color="primary" onClick={addEditTaskField}>+</Button>
+        </ModalBody>
+        <ModalFooter>
+          <Button color="success" onClick={saveChanges}>Update</Button>
+        </ModalFooter>
+      </Modal>
+    </div>
     </div>
   );
 }

@@ -21,7 +21,7 @@ body, html {
 
 /* Stylish form card */
 .form-card {
-  background-color: #1e293b;
+  background-color: #1e293b; /* slate gray */
   color: #f1f5f9;
   padding: 2rem;
   border-radius: 20px;
@@ -44,8 +44,6 @@ body, html {
   box-shadow: 0 6px 20px rgba(0, 0, 0, 0.08);
   background-color: #ffffff;
   transition: transform 0.2s ease;
-  padding: 15px 20px;
-  margin-bottom: 15px;
 }
 .task-lists .card:hover {
   transform: translateY(-3px);
@@ -65,33 +63,4 @@ body, html {
 .btn-success:hover {
   background-color: #0284c7;
   border-color: #0284c7;
-}
-
-/* NEW: Button with icon styles */
-.icon-button {
-  display: flex;
-  align-items: center;
-  gap: 5px;
-  padding: 8px 12px;
-  border-radius: 8px;
-  border: none;
-  font-size: 14px;
-  cursor: pointer;
-  transition: background-color 0.2s ease;
-}
-
-/* Colored delete/edit buttons */
-.icon-button.edit {
-  background-color: #10b981;
-  color: white;
-}
-.icon-button.delete {
-  background-color: #ef4444;
-  color: white;
-}
-.icon-button.edit:hover {
-  background-color: #059669;
-}
-.icon-button.delete:hover {
-  background-color: #dc2626;
 }
